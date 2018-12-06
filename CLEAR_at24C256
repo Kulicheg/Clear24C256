@@ -1,0 +1,47 @@
+#include <Wire.h>
+#include "AT24C256.h" //Include AT24C256 Code Libraries
+
+AT24C256 g_eeprom(0x50); //Start code 0x50 Address
+
+
+void setup() {
+  Serial.begin(115200);
+  
+  Serial.println ( "START... ");
+  Wire.begin();
+
+
+for (long int q = 0; q < 32768; q++)
+{
+byte w;
+
+g_eeprom.write (q,170);
+//w++;
+//if (w>255) {w=0;}
+//Serial.println (g_eeprom.read(q));
+
+float disp = q%1000; 
+if ( disp == 0) {Serial.println (q);}
+}
+Serial.println ( "FINISH... ");
+
+
+for (long int q = 0; q < 32768; q++)
+{
+int R = g_eeprom.read(q);
+ if (R!=170) 
+ {
+  Serial.print (q);
+  Serial.print (" = ");
+  Serial.println (R);
+ }
+float disp = q%1000; 
+if ( disp == 0) {Serial.println (q);}
+}
+Serial.println ( "FINISH... ");
+}
+
+
+
+void loop() {
+}
