@@ -10,10 +10,10 @@ void setup() {
   Serial.println ( "START... ");
   Wire.begin();
 
-
+byte w;
 for (long int q = 0; q < 32768; q++)
 {
-byte w;
+
 
 g_eeprom.write (q,170);
 //w++;
